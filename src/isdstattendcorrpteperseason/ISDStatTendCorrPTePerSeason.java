@@ -22,28 +22,6 @@ import java.util.logging.Logger;
  * @author vas_adam9
  */
 public class ISDStatTendCorrPTePerSeason {  
-    
-    static enum Seasons {
-        WINTER,
-        SPRING,
-        SUMMER,
-        AUTUMN
-    }
-    
-    static enum Params {
-        P0,
-        P1,
-        P2,
-        P3,
-        P4,
-        P5,
-        TE0,
-        TE1,
-        TE2,
-        TE3,
-        TE4,
-        TE5
-    }
 
     public static void main(String[] args) {
         File rootDir = new File("C:\\Users\\EDMMVAS\\Documents\\NOAA\\ISD_stat_tend_corr_per_season");
@@ -62,17 +40,13 @@ public class ISDStatTendCorrPTePerSeason {
                 ArrayList<String[]> hourList = corrPerHours.get(hour);
                 try (Scanner sc = new Scanner(hourFile)) {
                     while (sc.hasNextLine()) {                        
-                        String[] values = sc.nextLine().trim().split("[,]"); // System.out.println("," + ++numLine);
+                        String[] values = sc.nextLine().trim().split("[,]");
                         String season = values[0];
                         String parameter = values[1];
                         String day = values[2];
                         String corr = values[3];
                         String pVal = values[4];
 
-//                        if (!(   (season.equals("winter") && parameter.equals("Te") && day.equals("0"))
-//                              || (season.equals("spring") && parameter.equals("d1Te9h") && day.equals("0"))
-//                              || (season.equals("summer") && parameter.equals("Te") && day.equals("0"))
-//                              || (season.equals("autumn") && parameter.equals("P") && day.equals("-1")))) {
                         if (!(parameter.equals("Te") || parameter.equals("P"))
                             || !day.equals("0")) {                            
                             continue;
