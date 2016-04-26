@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -97,6 +98,11 @@ public class ISDStatTendCorrRegrPTePerSeason {
         }
         
         // Write 00h and 12h values into files
+        try {
+            Files.createDirectories(destDir.toPath());
+        } catch (IOException ex) {
+            Logger.getLogger(ISDStatTendCorrRegrPTePerSeason.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(destDir + "\\00.txt"))) {
             ArrayList<String[]> hourList = corrPerHours.get(0);
             for (String[] record : hourList) {
