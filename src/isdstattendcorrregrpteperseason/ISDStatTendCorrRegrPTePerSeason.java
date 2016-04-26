@@ -24,8 +24,8 @@ import java.util.logging.Logger;
 public class ISDStatTendCorrRegrPTePerSeason {  
 
     public static void main(String[] args) {
-        File rootDir = new File("C:\\Users\\EDMMVAS\\Documents\\NOAA\\ISD_stat_tend_corr_per_season");
-        File destDir = new File("C:\\Users\\EDMMVAS\\Documents\\NOAA\\ISD_stat_tend_corr_regr_PandTe_per_season");
+        File rootDir = new File("D:\\NOAA\\ISD_stat_tend_corr_per_season");
+        File destDir = new File("D:\\NOAA\\ISD_stat_tend_corr_regr_PandTe_per_season");
 
         File[] stationDirs = rootDir.listFiles();
         HashMap<Integer, ArrayList<String[]>> corrPerHours= new HashMap<>();
@@ -33,7 +33,7 @@ public class ISDStatTendCorrRegrPTePerSeason {
         corrPerHours.put(12, new ArrayList<>());
         for (File corrStationDir : stationDirs) {
             System.out.println(corrStationDir.getName());
-            File[] corrHourFiles = corrStationDir.listFiles();
+            File[] corrHourFiles = corrStationDir.listFiles((hourFile) -> hourFile.getName().endsWith(".txt"));
             for (File corrHourFile : corrHourFiles) {
                 System.out.println(corrHourFile.getName());
                 File regrHourFile = new File(corrHourFile.getAbsolutePath().replace("corr", "regr"));                
