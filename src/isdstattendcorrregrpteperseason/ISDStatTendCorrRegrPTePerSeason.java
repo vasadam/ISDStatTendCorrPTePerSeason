@@ -25,8 +25,9 @@ import java.util.logging.Logger;
 public class ISDStatTendCorrRegrPTePerSeason {  
 
     public static void main(String[] args) {
-        File rootDir = new File("D:\\NOAA\\ISD_stat_tend_corr_per_season");
-        File destDir = new File("D:\\NOAA\\ISD_stat_tend_corr_regr_PandTe_per_season");
+        File rootDir = new File("D:\\NOAA\\850\\ISD_stat_tend_corr_per_season");
+//        File destDir = new File("D:\\NOAA\\ISD_stat_tend_corr_regr_PandTe_per_season");
+        File destDir = new File("D:\\NOAA\\850\\best_tmp");
 
         File[] stationDirs = rootDir.listFiles();
         HashMap<Integer, ArrayList<String[]>> corrPerHours= new HashMap<>();
@@ -56,10 +57,14 @@ public class ISDStatTendCorrRegrPTePerSeason {
                         String sigmaA = regrValues[5];
                         String sigmaB = regrValues[6];                        
 
-                        if (!(parameter.equals("Te") || parameter.equals("P"))
-                            || !day.equals("0")) {                            
+                        if (!parameter.equals("Te"))                         
                             continue;
-                        }
+                        
+                        if (!day.equals("0"))
+                            continue;
+
+                        if (!season.equals("autumn"))
+                            continue;
 
                         // Add record only if p <= 0.05
                         if (Double.parseDouble(pVal) <= 0.05) {
