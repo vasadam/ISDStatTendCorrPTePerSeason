@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package isdstattendcorrregrpteperseason;
+package isdstattendcorrregrbestperseason;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author vas_adam9
  */
-public class ISDStatTendCorrRegrPTePerSeason {  
+public class ISDStatTendCorrRegrBestPerSeason {  
 
     public static void main(String[] args) {
         File rootDir = new File("D:\\NOAA\\850\\ISD_stat_tend_corr_per_season");
@@ -57,14 +57,14 @@ public class ISDStatTendCorrRegrPTePerSeason {
                         String sigmaA = regrValues[5];
                         String sigmaB = regrValues[6];                        
 
-                        if (!parameter.equals("Te"))                         
-                            continue;
-                        
-                        if (!day.equals("0"))
-                            continue;
-
-                        if (!season.equals("autumn"))
-                            continue;
+//                        if (!parameter.equals("Te"))                         
+//                            continue;
+//                        
+//                        if (!day.equals("0"))
+//                            continue;
+//
+//                        if (!season.equals("autumn"))
+//                            continue;
 
                         // Add record only if p <= 0.05
                         if (Double.parseDouble(pVal) <= 0.05) {
@@ -97,7 +97,7 @@ public class ISDStatTendCorrRegrPTePerSeason {
                     }
                     corrPerHours.put(hour, hourList);
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ISDStatTendCorrRegrPTePerSeason.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ISDStatTendCorrRegrBestPerSeason.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }
         }
@@ -106,7 +106,7 @@ public class ISDStatTendCorrRegrPTePerSeason {
         try {
             Files.createDirectories(destDir.toPath());
         } catch (IOException ex) {
-            Logger.getLogger(ISDStatTendCorrRegrPTePerSeason.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ISDStatTendCorrRegrBestPerSeason.class.getName()).log(Level.SEVERE, null, ex);
         }
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(destDir + "\\00.txt"))) {
             ArrayList<String[]> hourList = corrPerHours.get(0);
@@ -133,7 +133,7 @@ public class ISDStatTendCorrRegrPTePerSeason {
                 bw.newLine();
             }
         } catch (IOException ex) {
-            Logger.getLogger(ISDStatTendCorrRegrPTePerSeason.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ISDStatTendCorrRegrBestPerSeason.class.getName()).log(Level.SEVERE, null, ex);
         }    
         
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(destDir + "\\12.txt"))) {
@@ -161,7 +161,7 @@ public class ISDStatTendCorrRegrPTePerSeason {
                 bw.newLine();
             }
         } catch (IOException ex) {
-            Logger.getLogger(ISDStatTendCorrRegrPTePerSeason.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ISDStatTendCorrRegrBestPerSeason.class.getName()).log(Level.SEVERE, null, ex);
         }     
     }
 }
